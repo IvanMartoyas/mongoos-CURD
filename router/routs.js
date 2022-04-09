@@ -55,6 +55,16 @@ router.patch('/item/update/:id', async (req, res) => {
     res.json(i_update); 
 })
 
+// получть рандомную запись
+// http://localhost:3000/api/item/rundom/
+router.get('/item/rundom/', async (req, res) => {
 
+    const count = await Quote.countDocuments(); // количество записей
+    const random = Math.floor( Math.random() * count );
+    
+    const i_random = await Quote.findOne().skip(random)
+
+    res.json(i_random); 
+})
 
 module.exports = router;
